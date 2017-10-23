@@ -10,8 +10,13 @@ export class ProductService {
 constructor(public http: Http, public handleError: ErrorHandler) {
 }
 
-  getProducts(): Observable<any> {
-    return this.http.get("http://localhost:8080/getProducts")
+  getProducts(categoryList: string[]): Observable<any> {
+
+    let productURL: string = 
+    categoryList.length ? "http://localhost:8080/getProducts?category=" + categoryList.join(',')
+    : "http://localhost:8080/getProducts"
+
+    return this.http.get(productURL)
     .map(res => res.json())
     .catch(err => {
       console.log('UI error handling');

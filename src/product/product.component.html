@@ -16,25 +16,25 @@
               <div class="checkbox">
               <h5> Category </h5>
               <label>
-                <input type="checkbox" value="false">
+                <input type="checkbox" id="Groceries" (change)='getFilteredProducts($event)'>
                 Groceries 
               </label>
               </div>
               <div class="checkbox">
               <label>
-                <input type="checkbox" value="false">
+                <input type="checkbox" id="Pickles" (change)='getFilteredProducts($event)'>
                 Pickles 
               </label>
               </div>
               <div class="checkbox">
               <label>
-                <input type="checkbox" value="false">
+                <input type="checkbox" id="Foods" (change)='getFilteredProducts($event)'>
                 Foods 
               </label>
               </div>
               <div class="checkbox">
               <label>
-                <input type="checkbox" value="false">
+                <input type="checkbox" id="Snacks" (change)='getFilteredProducts($event)'>
                 Snacks 
               </label>
               </div>
@@ -85,7 +85,7 @@
             <tbody *ngFor='let product of products'>
               <tr>
                 <div class="col-md-2">
-                  <img src= "{{'assets/images/' + product.pictureName}}" class="img-thumbnail" alt="Responsive image">
+                  <img src= 'assets/images/{{product.pictureName}}' class="img-thumbnail" alt="Responsive image">
                 </div>
                 <div class="col-md-6">
                   <h4> {{product.name}} </h4>
@@ -98,6 +98,22 @@
               </tr>
             </tbody>
         </table>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li *ngFor='let index of pages'><a href="#">{{index}}</a></li>
+            <li>
+              <a href="#" aria-label="Next" (click)='count = count + 1' (click)='getPageNumbers({{count}})' (init)='count=0'>
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+       </nav>
+
     </div>   
   </div>
 </div>
