@@ -10,7 +10,8 @@ export class ProductComponent {
 
   constructor(private productService: ProductService) {
   }
-  pages: number[] = [1,2,3,4,5]
+  pageNumbers: number[] = [1,2,3,4,5]
+  maxProductsPerPage: number = 5;
   products: any[]
   categoryList: string[]=[]
 
@@ -19,6 +20,7 @@ export class ProductComponent {
       }  
 
   getProducts(categoryList?: string[]): void {
+    this.pageNumbers = [1,2,3,4,5]
     this.productService.getProducts(categoryList)
         .subscribe(
           data => {
@@ -37,12 +39,14 @@ export class ProductComponent {
     } 
    }
 
-   getPageNumbers(clickCount: number) {
-     let pages: number[] = []
-     for(var i=(5*clickCount)+1; i<=5*(clickCount+1); i++){
-        pages.push(i)
-     }
-     this.pages = pages
+   getNextPageNumbers() {
+      this.pageNumbers = this.pageNumbers
+                             .filter(page => page < (this.products.length/this.maxProductsPerPage+1)-this.maxProductsPerPage)
+                             .map(pageNumber => pageNumber + this.maxProductsPerPage) 
+    }
+
+   getPreviousPageNumbers() {
+    this.pageNumbers = this.pageNumbers.map(pageNumber => pageNumber-5)
    }
     
 }
