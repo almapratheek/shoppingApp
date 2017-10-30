@@ -10,17 +10,17 @@ export class ProductComponent {
 
   constructor(private productService: ProductService) {
   }
-  pageNumbers: number[] = [1,2,3,4,5]
-  maxProductsPerPage: number = 5;
-  products: any[]
-  categoryList: string[]=[]
+  pageNumbers: number[][] = []
+  maxProductsPerPage: number = 5
+  products: any[] = []
+  categoryList: string[] = []
 
   ngOnInit(): void {
         this.getProducts(this.categoryList)
+        this.paging(this.products, this.maxProductsPerPage)
       }  
 
-  getProducts(categoryList?: string[]): void {
-    this.pageNumbers = [1,2,3,4,5]
+  getProducts(categoryList?: string[]) {
     this.productService.getProducts(categoryList)
         .subscribe(
           data => {
@@ -32,6 +32,7 @@ export class ProductComponent {
     if(event.target.checked){
       this.categoryList.push(<string>event.target.id)    
       this.getProducts(this.categoryList)
+
     }   
     else {
       this.categoryList.splice(this.categoryList.indexOf(<string>event.target.id), 1)
@@ -39,14 +40,22 @@ export class ProductComponent {
     } 
    }
 
-   getNextPageNumbers() {
-      this.pageNumbers = this.pageNumbers
-                             .filter(page => page < (this.products.length/this.maxProductsPerPage+1)-this.maxProductsPerPage)
-                             .map(pageNumber => pageNumber + this.maxProductsPerPage) 
+   paging(productsList: any[], maxPages: number): void {
+    let nbrOfPages: number = 
+    productsList.length % maxPages ? 
+    productsList.length / maxPages : productsList.length / maxPages+1
+
+    let pages: number[]
+    for(let i=1; i <= nbrOfPages; i++) {
+      pages.push(i)
     }
 
-   getPreviousPageNumbers() {
-    this.pageNumbers = this.pageNumbers.map(pageNumber => pageNumber-5)
-   }
-    
+    if(nbrOfPages > 5) {
+      while(pages.length >= 5) {
+        this.pageNumbers.push(pages.splice(1,5))
+      }   
+    } 
+    this.pageNumbers.push(pages)     
+  }
+
 }

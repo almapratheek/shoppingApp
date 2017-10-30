@@ -89,30 +89,30 @@
                 </div>
                 <div class="col-md-6">
                   <h4> {{product.name}} </h4>
-                  <h4> {{product.description}}</h4>
+                  <h4> {{product.description}} </h4>
                 </div>
                 <div class="col-md-2">
                   <h4> {{product.PackageUnits}} </h4>
-                  <h4> {{product.price}}</h4>
+                  <h4> {{product.price}} </h4>
                 </div>
               </tr>
             </tbody>
         </table>
-        <nav aria-label="Page navigation">
-          <ul class="pagination">
+        <!--<nav aria-label="Page navigation">
+          <ul class="pagination" (init)='count = 0'>
             <li>
-              <a href="#" aria-label="Previous" (click)='getPreviousPageNumbers()'>
+              <a href="#" aria-label="Previous" (click)='count = count - 1'>
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li *ngFor='let index of pageNumbers'><a href="#">{{index}}</a></li>
+            <li *ngFor='let index of pageNumbers[count]'><a href="#">{{index}}</a></li>
             <li>
-              <a href="#" aria-label="Next" (click)='getNextPageNumbers()'>
+              <a href="#" aria-label="Next" (click)='count = count + 1'>
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
           </ul>
-       </nav>
+       </nav>-->
 
     </div>   
   </div>
