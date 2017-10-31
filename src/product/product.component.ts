@@ -17,7 +17,6 @@ export class ProductComponent {
 
   ngOnInit(): void {
         this.getProducts(this.categoryList)
-        this.paging(this.products, this.maxProductsPerPage)
       }  
 
   getProducts(categoryList?: string[]) {
@@ -25,6 +24,10 @@ export class ProductComponent {
         .subscribe(
           data => {
             this.products = data.products
+          },
+          err => {},
+          () => {
+            this.paging(this.products, this.maxProductsPerPage)
           })
   }
 
@@ -42,17 +45,17 @@ export class ProductComponent {
 
    paging(productsList: any[], maxPages: number): void {
     let nbrOfPages: number = 
-    productsList.length % maxPages ? 
-    productsList.length / maxPages : productsList.length / maxPages+1
+    (productsList.length % maxPages)==0 ? 
+    Math.floor(productsList.length / maxPages) : Math.floor(productsList.length / maxPages)+1
 
-    let pages: number[]
+    let pages: number[] = []
     for(let i=1; i <= nbrOfPages; i++) {
       pages.push(i)
     }
 
     if(nbrOfPages > 5) {
       while(pages.length >= 5) {
-        this.pageNumbers.push(pages.splice(1,5))
+        this.pageNumbers.push(pages.splice(0,5))
       }   
     } 
     this.pageNumbers.push(pages)     
