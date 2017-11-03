@@ -99,15 +99,17 @@
             </tbody>
         </table>
         <nav aria-label="Page navigation">
-          <ul class="pagination" (init)='count = 0'>
+          <ul class="pagination">
             <li>
-              <a href="#" aria-label="Previous" (click)='count = {{count}} - 1'>
+              <a href="#" aria-label="Previous" (click)='count==0? false: count=count-1'>
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li *ngFor='let index of pageNumbers[{{count}}]'><a href="#">{{index}}</a></li>
+            <li *ngFor="let index of pageNumbers[count]">
+                <a href="#">{{index}}</a>
+            </li>
             <li>
-              <a href="#" aria-label="Next" (click)='count = {{count}} + 1'>
+              <a href="#" aria-label="Next" (click)='count>=(pageNumbers.length-1)? false: count=count+1'>
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

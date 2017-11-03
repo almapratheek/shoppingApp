@@ -10,6 +10,7 @@ export class ProductComponent {
 
   constructor(private productService: ProductService) {
   }
+  count: number = 0
   pageNumbers: number[][] = []
   maxProductsPerPage: number = 5
   products: any[] = []
@@ -58,7 +59,7 @@ export class ProductComponent {
         this.pageNumbers.push(pages.splice(0,5))
       }   
     } 
-    this.pageNumbers.push(pages)     
+    this.pageNumbers.push(pages)
+    this.count = 0     
   }
-
 }
