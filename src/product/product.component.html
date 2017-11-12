@@ -106,7 +106,7 @@
               </a>
             </li>
             <li *ngFor="let index of pageNumbers[count]">
-                <a href="#">{{index}}</a>
+                <a href="#" (click)='getLimitedProducts($event)'>{{index}}</a>
             </li>
             <li>
               <a href="#" aria-label="Next" (click)='count>=(pageNumbers.length-1)? false: count=count+1'>
