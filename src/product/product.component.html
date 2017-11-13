@@ -2,121 +2,104 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="panel panel-primary">
-      <div class="panel-heading"><h3>Eshopping App</h3></div>
-
+      <div class="panel-heading">
+        <h3>Eshopping App</h3>
+      </div>
     </div>
   </div>
+
   <div class="row-fluid">
     <div class="col-md-2">
       <div class="panel panel-default">
-          
-          <div class="panel-heading">Product Filters</div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <div class="checkbox">
+        <div class="panel-heading">Product Filters</div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="checkbox">
               <h5> Category </h5>
               <label>
                 <input type="checkbox" id="Groceries" (change)='getFilteredProducts($event)'>
                 Groceries 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" id="Pickles" (change)='getFilteredProducts($event)'>
                 Pickles 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" id="Foods" (change)='getFilteredProducts($event)'>
                 Foods 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" id="Snacks" (change)='getFilteredProducts($event)'>
                 Snacks 
               </label>
-              </div>
-            </li>
-        
-            <li class="list-group-item">
-              <div class="checkbox">
-                <h5> Price </h5>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="checkbox">
+              <h5> Price </h5>
               <label>
                 <input type="checkbox" value="false">
                 Under $50 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" value="false">
                 $50 to $100 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" value="false">
                 $100 to $200 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" value="false">
                 $200 to $300 
               </label>
-              </div>
-              <div class="checkbox">
+            </div>
+            <div class="checkbox">
               <label>
                 <input type="checkbox" value="false">
                 $300 and above
               </label>
-              </div>
-            </li>
-          </ul>
-        </div>      
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="col-md-10">
-        <table class="table table-striped"> 
-          <caption class="text-left"> 
-            <h4> Products You are looking for: </h4>
-            </caption>
-          
-            <tbody *ngFor='let product of products'>
-              <tr>
-                <div class="col-md-2">
-                  <img src= 'assets/images/{{product.pictureName}}' class="img-thumbnail" alt="Responsive image">
-                </div>
-                <div class="col-md-6">
-                  <h4> {{product.name}} </h4>
-                  <h4> {{product.description}} </h4>
-                </div>
-                <div class="col-md-2">
-                  <h4> {{product.PackageUnits}} </h4>
-                  <h4> {{product.price}} </h4>
-                </div>
-              </tr>
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation">
-          <ul class="pagination">
-            <li>
-              <a href="#" aria-label="Previous" (click)='count==0? false: count=count-1'>
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li *ngFor="let index of pageNumbers[count]">
-                <a href="#" (click)='getLimitedProducts($event)'>{{index}}</a>
-            </li>
-            <li>
-              <a href="#" aria-label="Next" (click)='count>=(pageNumbers.length-1)? false: count=count+1'>
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-       </nav>
+      <table class="table table-striped">
+        <caption class="text-left">
+          <h4> Products You are looking for: </h4>
+        </caption>
 
-    </div>   
+        <tbody *ngFor='let product of products'>
+          <tr>
+            <div class="col-md-2">
+              <img src='assets/images/{{product.pictureName}}' class="img-thumbnail" alt="Responsive image">
+            </div>
+            <div class="col-md-6">
+              <h4> {{product.name}} </h4>
+              <h4> {{product.description}} </h4>
+            </div>
+            <div class="col-md-2">
+              <h4> {{product.PackageUnits}} </h4>
+              <h4> {{product.price}} </h4>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+      <paging-shared (onPageClick)='onPageClick($event)' class="text-right"></paging-shared>
+    </div>
   </div>
 </div>
-

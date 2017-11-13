@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from './product.service';
+import { PagingComponent } from '../paging/paging.component';
 
 @Component({
   selector: 'product-root',
@@ -10,8 +11,9 @@ export class ProductComponent {
 
   constructor(private productService: ProductService) {
   }
-  count: number = 0
-  pageNumbers: number[][] = []
+
+  @ViewChild(PagingComponent)
+  private paging: PagingComponent
   maxProductsPerPage: number = 10
   products: any[] = []
   categoryList: string[] = []
@@ -30,7 +32,7 @@ export class ProductComponent {
           },
           err => {},
           () => {
-            this.paging(this.productCount, this.maxProductsPerPage)
+            this.paging.paging(this.productCount, this.maxProductsPerPage)
           })
   }
 
@@ -46,33 +48,13 @@ export class ProductComponent {
     } 
    }
 
-  getLimitedProducts(event) {
-    this.productService.getProducts(this.maxProductsPerPage, this.categoryList, <number>event.target.text)
+  onPageClick(pageIndex: number) {
+    this.productService.getProducts(this.maxProductsPerPage, this.categoryList, pageIndex)
         .subscribe(
           data => {
             this.products = data.products
           },
           err => {},
         )
-  } 
-
-   paging(productCount: number, maxPages: number): void {
-    this.pageNumbers = [] 
-    let nbrOfPages: number = 
-    (productCount % maxPages)==0 ? 
-    Math.floor(productCount / maxPages) : Math.floor(productCount / maxPages)+1
-
-    let pages: number[] = []
-    for(let i=1; i <= nbrOfPages; i++) {
-      pages.push(i)
-    }
-
-    if(nbrOfPages > 5) {
-      while(pages.length >= 5) {
-        this.pageNumbers.push(pages.splice(0,5))
-      }   
-    } 
-    this.pageNumbers.push(pages)
-    this.count = 0     
   }
 }

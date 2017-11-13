@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { ProductComponent } from './product.component';
+import { PagingComponent } from '../paging/paging.component';
 import { ProductService } from './product.service';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
-    ProductComponent
+    ProductComponent,
+    PagingComponent
   ],
   imports: [
     BrowserModule,

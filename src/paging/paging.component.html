@@ -1,0 +1,27 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination pagination-lg">
+        <li *ngIf='count==0' class='disabled'>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li *ngIf='count!=0'>
+            <a href="#" aria-label="Previous" (click)='count==0? false: count=count-1'>
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li *ngFor="let index of pageNumbers[count]">
+            <a href="#" (click)='pageIndexClick($event)'>{{index}}</a>
+        </li>
+        <li *ngIf='count>=(pageNumbers.length-1)' class='disabled'>
+            <a href="#" aria-label="Next" (click)='count>=(pageNumbers.length-1)? false: count=count+1'>
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <li *ngIf='count<(pageNumbers.length-1)'>
+            <a href="#" aria-label="Next" (click)='count>=(pageNumbers.length-1)? false: count=count+1'>
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
